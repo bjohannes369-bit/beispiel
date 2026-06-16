@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WebWerk Lokal - Mehr Kunden für lokale Unternehmen</title>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;600;700&display=swap");
+
+:root {
+    --bg: #f3efe8;
+    --text: #181716;
+    --muted: #5f5a53;
+    --paper: #fffdf8;
+    --brand: #0d7c66;
+    --brand-strong: #095a4a;
+    --accent: #f4b942;
+    --line: #e5ded2;
+    --shadow: 0 24px 50px rgba(17, 18, 18, 0.12);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Manrope", sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at 8% 12%, rgba(13, 124, 102, 0.16), transparent 36%),
+        radial-gradient(circle at 92% 4%, rgba(244, 185, 66, 0.24), transparent 28%),
+        radial-gradient(circle at 90% 85%, rgba(13, 124, 102, 0.13), transparent 38%),
+        var(--bg);
+    min-height: 100vh;
+}
+
+.page {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 30px 20px 120px;
+}
+
+.hero {
+    background: linear-gradient(160deg, rgba(24, 23, 22, 0.96), rgba(13, 124, 102, 0.92));
+    color: #fff;
+    border-radius: 28px;
+    padding: 52px 34px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+    animation: fade-in 700ms ease-out;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border-radius: 999px;
+    background: rgba(244, 185, 66, 0.2);
+    right: -80px;
+    top: -90px;
+}
+
+.kicker {
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+h1,
+h2,
+h3 {
+    font-family: "Space Grotesk", sans-serif;
+    margin: 0;
+}
+
+h1 {
+    font-size: clamp(30px, 6vw, 52px);
+    line-height: 1.08;
+    margin-top: 8px;
+}
+
+.lead {
+    margin: 16px 0 30px;
+    max-width: 700px;
+    color: #f7f4ee;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-weight: 700;
+    transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: #2a2214;
+    box-shadow: 0 8px 20px rgba(244, 185, 66, 0.35);
+}
+
+.btn-secondary {
+    border: 1px solid rgba(255, 255, 255, 0.34);
+    color: #fff;
+}
+
+.grid {
+    display: grid;
+    gap: 16px;
+    margin-top: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 0 12px 22px rgba(30, 31, 30, 0.06);
+    animation: rise-up 650ms ease both;
+}
+
+.card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    margin: 0;
+    color: var(--muted);
+}
+
+.benefits {
+    margin-top: 26px;
+    background: rgba(255, 253, 248, 0.86);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 16px 18px;
+    color: var(--muted);
+}
+
+.benefits strong {
+    color: var(--text);
+}
+
+.chatbox {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    width: min(360px, calc(100vw - 24px));
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(14, 17, 16, 0.24);
+    border: 1px solid rgba(9, 90, 74, 0.2);
+    background: #fff;
+}
+
+.chat-header {
+    background: linear-gradient(130deg, var(--brand), var(--brand-strong));
+    color: #f7f9f8;
+    padding: 12px 14px;
+    font-weight: 700;
+}
+
+.chat-body {
+    height: 240px;
+    padding: 12px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.msg {
+    max-width: 88%;
+    padding: 8px 10px;
+    border-radius: 10px;
+    line-height: 1.4;
+}
+
+.msg-user {
+    align-self: flex-end;
+    background: #edf7f4;
+}
+
+.msg-bot {
+    align-self: flex-start;
+    background: #f7f2e8;
+}
+
+.msg-status {
+    align-self: flex-start;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.chat-input {
+    display: flex;
+    border-top: 1px solid var(--line);
+}
+
+.chat-input input {
+    flex: 1;
+    border: 0;
+    padding: 12px;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.chat-input input:focus {
+    outline: 2px solid rgba(13, 124, 102, 0.3);
+    outline-offset: -2px;
+}
+
+.chat-input button {
+    border: 0;
+    min-width: 94px;
+    background: var(--brand);
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.chat-input button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes rise-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 760px) {
+    .page {
+        padding-bottom: 420px;
+    }
+
+    .hero {
+        border-radius: 22px;
+        padding: 40px 20px;
+    }
+
+    .chatbox {
+        right: 12px;
+        left: 12px;
+        width: auto;
+        bottom: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+<main class="page">
+    <header class="hero">
+        <div class="kicker">Digitale Sichtbarkeit für Ihre Region</div>
+        <h1>Die eigene Website, die aus Besuchern echte Anfragen macht.</h1>
+        <p class="lead">Wir bauen moderne, schnelle und mobiloptimierte Websites für lokale Unternehmen, damit neue Kunden Sie sofort finden und kontaktieren können.</p>
+        <div class="hero-actions">
+            <a class="btn btn-primary" href="mailto:kiel_ben@icloud.com?subject=Kostenlose%20Anfrage%20Website&body=Hallo%2C%20ich%20interessiere%20mich%20für%20eine%20moderne%20Website.">Jetzt kostenlos anfragen</a>
+            <a class="btn btn-secondary" href="#angebot">Leistung ansehen</a>
+        </div>
+    </header>
+
+    <section id="angebot" class="grid">
+        <article class="card">
+            <h3>Warum neu starten?</h3>
+            <p>Viele Betriebe verlieren täglich Umsatz, weil ihre Website veraltet ist oder auf dem Smartphone nicht überzeugt.</p>
+        </article>
+        <article class="card">
+            <h3>Was Sie bekommen</h3>
+            <p>Modernes Design, klare Texte, schnelle Ladezeiten und eine starke Struktur für mehr Kontaktanfragen.</p>
+        </article>
+        <article class="card">
+            <h3>Mit KI-Chat</h3>
+            <p>Der Assistent beantwortet Fragen rund um Ihr Angebot und qualifiziert Interessenten direkt auf der Seite.</p>
+        </article>
+    </section>
+
+    <div class="benefits">
+        <strong>Inklusive:</strong> Mobile Optimierung, Kontaktmöglichkeit per E-Mail, KI-Chatbot, schnelle Umsetzung in wenigen Tagen.
+    </div>
+</main>
+
+<div class="chatbox">
+    <div class="chat-header">KI-Assistent</div>
+    <div class="chat-body" id="chat">
+        <div class="msg msg-bot">Hallo 👋 Wie kann ich Ihnen helfen?</div>
+    </div>
+    <div class="chat-input">
+        <input id="input" placeholder="Nachricht..." aria-label="Nachricht eingeben">
+        <button id="sendButton" onclick="send()">Senden</button>
+    </div>
+</div>
+
+<script>
+function appendMessage(text, type) {
+    const chat = document.getElementById("chat");
+    const msg = document.createElement("div");
+    msg.className = "msg " + type;
+    msg.textContent = text;
+    chat.appendChild(msg);
+    chat.scrollTop = chat.scrollHeight;
+}
+
+async function send() {
+    const input = document.getElementById("input");
+    const sendButton = document.getElementById("sendButton");
+    const userText = input.value.trim();
+    if (!userText) return;
+
+    appendMessage("Du: " + userText, "msg-user");
+    input.value = "";
+    sendButton.disabled = true;
+
+    const status = document.createElement("div");
+    status.className = "msg-status";
+    status.textContent = "Assistent schreibt...";
+    const chat = document.getElementById("chat");
+    chat.appendChild(status);
+    chat.scrollTop = chat.scrollHeight;
+
+    try {
+        const res = await fetch("/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: userText })
+        });
+
+        if (!res.ok) {
+            throw new Error("Server antwortet nicht korrekt");
+        }
+
+        const data = await res.json();
+        status.remove();
+        appendMessage("Bot: " + (data.reply || "Keine Antwort erhalten."), "msg-bot");
+    } catch (error) {
+        status.remove();
+        appendMessage("Bot: Der Chat ist gerade nicht erreichbar. Bitte pruefen Sie Server und API-Key.", "msg-bot");
+    } finally {
+        sendButton.disabled = false;
+        input.focus();
+    }
+}
+
+document.getElementById("input").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        send();
+    }
+});
+</script>
+</body>
+</html>
