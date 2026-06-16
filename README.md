@@ -29,3 +29,10 @@
 7. Deploy starten.
 
 Nach dem Deploy ist die Website unter deiner Render-URL erreichbar. Der Chat nutzt automatisch `/chat` auf derselben Domain.
+
+## Alternative: Render Blueprint
+
+1. Die Datei `render.yaml` ist bereits im Projekt enthalten.
+2. In Render `New +` -> `Blueprint` waehlen.
+3. Repository auswaehlen und Deploy starten.
+4. Danach bei den Service-Umgebungsvariablen `OPENAI_API_KEY` setzen.
